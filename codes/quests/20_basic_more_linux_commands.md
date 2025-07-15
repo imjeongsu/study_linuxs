@@ -16,12 +16,13 @@ C:\Develops\quests
 
 문제 1-2: 폴더 구조 만들기
 다음 폴더 구조를 생성하세요:
+```
 powershell_practice/
 ├── documents/
 ├── images/
 ├── backup/
 └── temp/
-
+```
 ```shell
 PS C:\Develops\quests> mkdir powershell_practice
 
@@ -322,7 +323,7 @@ d-----      2025-07-15   오후 3:59                images
 문제 5-1: 프로젝트 구조 만들기
 
 다음과 같은 프로젝트 구조를 생성하세요:
-
+```
 my_project/
 ├── src/
 │   └── main.py (내용: "print('Hello World')")
@@ -330,7 +331,7 @@ my_project/
 │   └── readme.txt (내용: "This is my project")
 ├── tests/
 └── build/
-
+```
 ```shell
 PS C:\Develops\quests> cd my_project
 PS C:\Develops\quests\my_project> mkdir src

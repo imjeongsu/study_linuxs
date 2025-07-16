@@ -181,11 +181,27 @@ config  docs  src  tests
 ```
 
 src/ 디렉터리에 main.py 파일 생성 (내용: "# Main Python File")
-
+```shell
+[im@localhost src]$ touch main.py
+[im@localhost src]$ ls
+main.py
+```
 docs/ 디렉터리에 README.md 파일 생성 (내용: "# My Project Documentation")
+```shell
+[im@localhost my_project]$ cd docs
+[im@localhost docs]$ touch README.md
+[im@localhost docs]$ ls
+README.md
 
+```
 config/ 디렉터리에 settings.conf 파일 생성 (내용: "# Configuration File")
+```shell
+[im@localhost my_project]$ cd config
+[im@localhost config]$ touch settings.conf
+[im@localhost config]$ ls
+settings.conf
 
+```
 5-2. 백업 및 정리
 
 전체 my_project/ 디렉터리를 my_project_backup/으로 복사하시오.

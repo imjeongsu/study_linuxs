@@ -185,6 +185,9 @@ src/ 디렉터리에 main.py 파일 생성 (내용: "# Main Python File")
 [im@localhost src]$ touch main.py
 [im@localhost src]$ ls
 main.py
+[im@localhost src]$ echo "# Main Python File") > main.py
+[im@localhost src]$ cat main.py
+
 ```
 docs/ 디렉터리에 README.md 파일 생성 (내용: "# My Project Documentation")
 ```shell
@@ -192,6 +195,8 @@ docs/ 디렉터리에 README.md 파일 생성 (내용: "# My Project Documentati
 [im@localhost docs]$ touch README.md
 [im@localhost docs]$ ls
 README.md
+[im@localhost src]$ echo "# My Project Documentation" > README.md
+[im@localhost src]$ cat README.md
 
 ```
 config/ 디렉터리에 settings.conf 파일 생성 (내용: "# Configuration File")
@@ -200,6 +205,9 @@ config/ 디렉터리에 settings.conf 파일 생성 (내용: "# Configuration Fi
 [im@localhost config]$ touch settings.conf
 [im@localhost config]$ ls
 settings.conf
+[im@localhost src]$ echo "# Configuration File" > settings.conf
+[im@localhost src]$ cat settings.conf
+
 
 ```
 5-2. 백업 및 정리

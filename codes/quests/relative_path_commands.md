@@ -308,6 +308,9 @@ cd ../dev/../../config/
 
 # D
 cp manual.txt ../../tests/unit/backup.txt
+D 오류
+
+docs/user에 파일없음.
 
 
 E 오류

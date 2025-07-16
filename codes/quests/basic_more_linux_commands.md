@@ -134,9 +134,19 @@ documents  readme.txt
 4-1. 파일 이동
 
 memo.txt 파일을 documents/ 디렉터리로 이동하시오.
+```shell
+[im@localhost notes]$ mv memo.txt /home/im/practice/documents
+[im@localhost notes]$ cd ..
+[im@localhost documents]$ ls
+memo.txt  notes  reports
 
+```
 images/ 디렉터리를 practice/media/로 이름을 변경하시오.
-
+```shell
+[im@localhost practice]$ rename images mdia /home/im/practice/images
+[im@localhost practice]$ ls
+backup  documents  mdia  my_project  my_project_backup
+```
 4-2. 파일 이름 변경
 
 readme.txt를 introduction.txt로 이름을 변경하시오.

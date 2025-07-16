@@ -3,7 +3,7 @@
 다음 명령어로 실습 환경을 준비하세요:
 
 
-'''shell
+```shell
 mkdir -p ~/practice/project/{src,docs,tests,config}
 mkdir -p ~/practice/project/src/{main,utils}
 mkdir -p ~/practice/project/docs/{user,dev}

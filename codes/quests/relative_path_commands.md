@@ -268,17 +268,12 @@ src/main/ 디렉토리의 모든 파일을 docs/dev/ 디렉토리에 복사하�
 api.md  app.py  helper.py
 ```
 
-docs/user/ 디렉토리의 모든 파일을 tests/unit/ 디렉토리로 복사하시오.
+docs/user/ 디렉토리의 모든 파일을 tests/unit/ 디렉토리로 이동하시오.
 ```shell
-[im@localhost user]$ cp -r *../../tests/unit
-cp: missing destination file operand after '*../../tests/unit'
-Try 'cp --help' for more information.
-[im@localhost user]$ cp api.md manual.txt ../../tests/unit
-[im@localhost user]$ cd ..
-[im@localhost docs]$ cd ..
-[im@localhost project]$ cd tests/unit
-[im@localhost unit]$ ls
-api.md  manual.txt  settings.conf  test_main.py
+[im@localhost user]$ mv ./* ../../tests/unit
+[im@localhost user]$ ls ../../tests/unit
+api.md  manual.txt
+
 ```
 
 config/ 디렉토리 전체를 backup_config/로 복사하시오.

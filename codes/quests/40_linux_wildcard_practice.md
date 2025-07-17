@@ -360,6 +360,14 @@ touch ./temp/readme.txt
 -rw-r--r--. 1 im im 0 Jul 17 14:38 file3.doc
 -rw-r--r--. 1 im im 0 Jul 17 14:38 test1.log
 -rw-r--r--. 1 im im 0 Jul 17 14:38 test2.log
+
+ls -1 ./ | grep -E '^[^0-9]*[0-9][^0-9]*$'
+file1.txt
+file2.txt
+file3.doc
+test1.log
+test2.log
+
 ```
 
 

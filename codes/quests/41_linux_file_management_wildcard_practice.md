@@ -117,6 +117,15 @@ total 0
 # 파일명에 숫자가 포함된 모든 이미지 파일(.jpg, .png)을 images 디렉터리로 복사하세요
 
 # 명령어를 작성하세요:
+
+```shell
+[im@localhost wildcard_file_practice]$ cp *[0-9]*.{jpg,png} images && ls -l images
+total 0
+-rw-r--r--. 1 im im 0 Jul 17 18:04 image1.jpg
+-rw-r--r--. 1 im im 0 Jul 17 18:04 image2.jpg
+-rw-r--r--. 1 im im 0 Jul 17 18:04 image3.png
+```
+
 2-4. 특정 범위의 파일 복사
 # data1.csv, data2.csv, data3.csv 파일만 backup 디렉터리로 복사하세요
 

@@ -252,7 +252,7 @@ total 0
 # 명령어를 작성하세요
 ```
 ```shell
-[im@localhost wildcard_practice]$ ls -l *{debug,error}.log
+[im@localhost wildcard_practice]$ ls -l !(t*).log
 -rw-r--r--. 1 im im 0 Jul 17 14:38 debug.log
 -rw-r--r--. 1 im im 0 Jul 17 14:38 error.log
 ```

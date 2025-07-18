@@ -303,10 +303,7 @@ ls -l backup/txt_files
 # conf 확장자 파일 없음
 ```
 
-# 3단계: 원본 설정 파일들을 삭제
-```shell
-#원본 설정 파일이 무엇인지 확인 필요
-```
+
 
 # 명령어들을 작성하세요:
 5-3. 날짜별 로그 정리
@@ -390,34 +387,37 @@ rm *.tmp.*
 # 3. 2023년 로그 파일들을 삭제
 
 # 4. 시스템 로그들을 logs/system 디렉터리로 이동
+```shell
+[im@localhost wildcard_file_practice]$ mv ./logs/2024_{01..12}.log /logs/2024 && \ cd logs/errors && \
+cp /logs/errors/2024_{01..12}.log /logs/errors && \
+rm -r ../2023/2023_{01..12}.log && \
+mv ../system_{0..9}.log ../system
+```
 
 7-3. 개발 환경 정리 시나리오
 # 시나리오: 개발 프로젝트 구조 정리
 
 # 1. 모든 스크립트 파일(*.sh)을 scripts 디렉터리로 이동
-```shell
-[im@localhost wildcard_file_practice]$ mv *.sh scripts/
 
-```
 
 # 2. 설정 파일들(*.conf, *.config)을 config 디렉터리로 복사
-```shell
-[im@localhost wildcard_file_practice]$ cp *.{conf,config}.* config/
-```
+
 # 3. 문서 파일들(*.md, *.txt)을 docs 디렉터리로 이동
-```shell
-[im@localhost wildcard_file_practice]$ mv *.{md,txt}.* docs/
-```
+
 
 # 4. 데이터 파일들(*.csv, *.dat)을 data 디렉터리로 이동
-```shell
-[im@localhost wildcard_file_practice]$ mv *.{csv,dat}.* data/
-```
 
+```shell
+[im@localhost wildcard_file_practice]$ mv *.sh scripts/ && \
+cp *.{conf,config}.* config/ && \
+mv *.{md,txt}.* docs/ && \
+mv *.{csv,dat}.* data/
+```
 
 
 
 # 존재하지 않으면 디렉터리를 생성한 후 이동하는 명령어를 작성하세요
+
 
 # 명령어를 작성하세요:
 

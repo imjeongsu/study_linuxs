@@ -275,7 +275,7 @@ project_logs 디렉토리로 이동한 후, 이동에 성공한 경우 log.txt �
 명령어를 작성하세요:
 # 디렉토리 이동 && 파일 생성 && 메시지 출력
 ```shell
-[im@localhost new_project]$ cd project_logs && touch log.txt && echo "로그 생성 완료" >>
+[im@localhost new_project]$ cd project_logs && touch log.txt && echo "로그 생성 완료" 
 bash: log.txt: Permission denied
 # log.txt 파일 생성이 불가 -> w 권한이 없기 때문
 ```

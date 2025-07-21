@@ -67,11 +67,13 @@ tree permission_practice
 
 1. 기본 권한 설정
 1-1. 개발팀 파일 권한 설정
+
+# 1-1 답안 작성란
 개발팀(developers 그룹) 관련 파일들의 권한을 다음과 같이 설정하세요:
 
 A. company/departments/dev/ 디렉터리: 개발팀만 접근 가능, 소유자와 그룹은 읽기/쓰기/실행 가능
 
-# 1-1 답안 작성란
+
 
 ```shell
 # dev 디렉터리에 user / group을 alice / developers로 변경
@@ -144,10 +146,13 @@ C. company/departments/dev/build.sh: 개발팀만 실행 가능
 ```
 
 1-2. 개인 디렉터리 보안 설정
+# 1-2 답안 작성란
+
 각 사용자의 개인 디렉터리와 파일을 다음과 같이 설정하세요:
 A. private/alice/ 디렉터리: alice만 접근 가능
 
 ```shell
+[root@localhost private]# chown alice alice
 [root@localhost private]# ls -l
 total 0
 drwx------. 2 alice root 65 Jul 21 16:48 alice
@@ -157,28 +162,95 @@ drwxr-xr-x. 2 root  root  6 Jul 21 16:48 diana
 drwxr-xr-x. 2 root  root  6 Jul 21 16:48 eve
 ```
 
-private/alice/personal.txt: alice만 읽기/쓰기 가능
-private/bob/config.json: bob만 읽기/쓰기 가능
+B. private/alice/personal.txt: alice만 읽기/쓰기 가능
+```shell
+# personal.txt user 권한 alice 로 변경 
+[root@localhost alice]# chown alice personal.txt
+[root@localhost alice]# ls -l
+total 0
+-rw-r--r--. 1 root  root 0 Jul 21 21:22 backup.tar
+-rw-r--r--. 1 alice root 0 Jul 21 21:22 personal.txt
+-rw-r--r--. 1 root  root 0 Jul 21 21:22 settings.conf
+# personal.txt user-alice read,write 만 가능
+# group , others 접근 불가
+[root@localhost alice]# chmod 600 personal.txt
+[root@localhost alice]# ls -l
+total 0
+-rw-r--r--. 1 root  root 0 Jul 21 21:22 backup.tar
+-rw-------. 1 alice root 0 Jul 21 21:22 personal.txt
+-rw-r--r--. 1 root  root 0 Jul 21 21:22 settings.conf
+
+```
+C. private/bob/config.json: bob만 읽기/쓰기 가능
 명령어를 작성하세요:
-# 1-2 답안 작성란
 
-
-
+```shell
+# config.json user-bob read,write 만 가능
+# group , others 접근 불가
+[root@localhost bob]# chown bob config.json
+[root@localhost bob]# chmod 600 config.json
+[root@localhost bob]# ls -l
+total 0
+-rw-r--r--. 1 root root 0 Jul 21 21:22 archive.zip
+-rw-------. 1 bob  root 0 Jul 21 21:22 config.json
+-rw-r--r--. 1 root root 0 Jul 21 21:22 notes.md
+```
 
 
 
 
 2. 그룹 기반 권한 관리
-2-1. 공유 리소스 접근 권한
-shared/ 디렉터리의 권한을 다음과 같이 설정하세요:
-shared/documents/: developers와 managers 그룹 모두 읽기 가능, 소유자만 쓰기 가능
-shared/resources/: developers 그룹만 접근 가능
-shared/tools/: 모든 사용자가 읽기 가능, developers 그룹만 실행 가능
-명령어를 작성하세요:
+2-1. 공유 리소스 접근 
 # 2-1 답안 작성란
+shared/ 디렉터리의 권한을 다음과 같이 설정하세요:
+A. shared/documents/: developers와 managers 그룹 모두 읽기 가능, 소유자만 쓰기 
+
+```shell
+# developers + managers 그룹 생성
+[root@localhost shared]# sudo groupadd devmanage
+# devmanage 그룹 인원추가
+[root@localhost permission_practice]# usermod  -a -G devmanage alice
+[root@localhost permission_practice]# usermod  -a -G devmanage bob
+[root@localhost permission_practice]# usermod  -a -G devmanage charlie
+[root@localhost permission_practice]# usermod  -a -G devmanage diana
+
+[root@localhost shared]# chown alice:devmanage documents
+[root@localhost shared]# ls -l
+total 0
+drwxr-xr-x. 2 alice devmanage 68 Jul 21 21:22 documents
+# user alice 소유자 쓰기 가능 / group dev + manage 모두 읽기 가능
+drwxr-xr-x. 2 root  root      58 Jul 21 21:22 resources
+drwxr-xr-x. 2 root  root      40 Jul 21 21:22 tools
+```
 
 
+B. shared/resources/: developers 그룹만 접근 가능
 
+```shell
+# resources/ group-developers 지정,  user,other 권한 X
+[root@localhost shared]# chown :developers ./resources
+[root@localhost shared]# chmod 050 resources/
+[root@localhost shared]# ls -l
+total 0
+drwxr-x--x. 2 alice devmanage  68 Jul 21 21:22 documents
+d---r-x---. 2 root  developers 58 Jul 21 21:22 resources
+drwxr-xr-x. 2 root  root       40 Jul 21 21:22 tools
+
+```
+C. shared/tools/: 모든 사용자가 읽기 가능, developers 그룹만 실행 가능
+명령어를 작성하세요:
+```shell
+# tools/ group-developers 지정
+[root@localhost shared]# chown :developers ./tools
+# group만 실행가능 + 모든 사용자 read 가능
+[root@localhost shared]# chmod 450 ./tools
+[root@localhost shared]# ls -l
+total 0
+drwxr-x--x. 2 alice devmanage  68 Jul 21 21:22 documents
+d---r-x---. 2 root  developers 58 Jul 21 21:22 resources
+dr--r-x---. 2 root  developers 40 Jul 21 21:22 tools
+
+```
 
 
 2-2. 프로젝트별 협업 권한
@@ -188,15 +260,20 @@ company/projects/project_b/: alice와 bob만 접근 가능하도록 설정
 명령어를 작성하세요:
 # 2-2 답안 작성란
 
-
-
-
-
+```shell
+[root@localhost projects]# chown :developers project_a
+[root@localhost projects]# sudo groupadd alicebob
+[root@localhost projects]# usermod -a -G alicebob alice
+[root@localhost projects]# usermod -a -G alicebob bob
+[root@localhost projects]# chown :alicebob project_b
+[root@localhost projects]# ls -l
+total 0
+drwxr-xr-x. 2 root developers 55 Jul 21 21:22 project_a
+drwxr-xr-x. 2 root alicebob   67 Jul 21 21:22 project_b
+drwxr-xr-x. 2 root root        6 Jul 21 21:22 project_c
+```
 
 3. 고급 권한 설정
-
-
-
 
 
 3-2. 숫자 표기법으로 복합 권한 설정

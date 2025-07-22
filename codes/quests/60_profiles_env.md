@@ -121,7 +121,7 @@ sudo 권한 필요
 sudo cat /etc/login_notice.txt
 
 ```shell
-[root@localhost etc]# echo "대상 : 모든사용자 / 모든 사용자에게 공지합니다." > login_notice.txt
+[root@localhost etc] echo "대상 : 모든사용자 / 모든 사용자에게 공지합니다." > login_notice.txt
 
 [im@localhost ~]$ su - im
 Password: 

@@ -283,8 +283,20 @@ shared/documents/manual.pdf: 소유자(rw-), 그룹(r--), 기타(r--)
 logs/2024/06/system.log: 소유자(rw-), 그룹(r--), 기타(---)
 명령어를 작성하세요:
 # 3-2 답안 작성란
+```shell
+[root@localhost finance]# chmod 640 budget.xlsx
+[root@localhost documents]# chmod 644 manual.pdf
+[root@localhost 06]# chmod 640 system.log
 
+[root@localhost permission_practice]# ls -l company/departments/finance/budget.xlsx
+-rw-r-----. 1 root root 0 Jul 21 16:48 company/departments/finance/budget.xlsx
 
+[root@localhost permission_practice]# ls -l shared/documents/manual.pdf
+-rw-r--r--. 1 root root 0 Jul 21 16:48 shared/documents/manual.pdf
+
+[root@localhost permission_practice]# ls -l logs/2024/06/system.log
+-rw-r-----. 1 root root 0 Jul 21 16:48 logs/2024/06/system.log
+```
 
 
 
@@ -292,26 +304,81 @@ logs/2024/06/system.log: 소유자(rw-), 그룹(r--), 기타(---)
 4. 소유권 및 그룹 관리
 4-1. 소유권 변경
 다음과 같이 파일과 디렉터리의 소유권을 변경하세요:
-company/departments/dev/ 디렉터리와 모든 하위 파일: alice 소유, developers 그룹
-company/departments/hr/ 디렉터리와 모든 하위 파일: diana 소유, managers 그룹
-shared/tools/ 디렉터리와 모든 하위 파일: root 소유, developers 그룹
+
+
 명령어를 작성하세요:
 # 4-1 답안 작성란
+company/departments/dev/ 디렉터리와 모든 하위 파일: alice 소유, developers 그룹
+```shell
+[root@localhost permission_practice]# ls -l company/departments/
+total 0
+drwxr-xr-x. 2 alice developers 123 Jul 21 16:49 dev
+drwxr-xr-x. 2 root  root        64 Jul 21 16:48 finance
+drwxr-xr-x. 2 root  root        89 Jul 21 16:49 hr
+drwxr-xr-x. 2 root  root         6 Jul 21 16:48 marketing
+[root@localhost permission_practice]# ls -l company/departments/dev/
+total 12
+-rw-r--r--. 1 alice developers 18 Jul 21 16:49 api.conf
+-rwxr-xr--. 1 alice developers 32 Jul 21 16:49 build.sh
+-rw-r--r--. 1 alice developers  0 Jul 21 16:48 config.py
+-rw-r--r--. 1 alice developers 24 Jul 21 16:49 database.conf
+-rw-rw-r--. 1 alice developers  0 Jul 21 16:48 main.py
+-rw-r--r--. 1 alice developers  0 Jul 21 16:48 README.md
+-rw-r--r--. 1 alice developers  0 Jul 21 16:48 test.py
 
+```
+company/departments/hr/ 디렉터리와 모든 하위 파일: diana 소유, managers 그룹
 
+```shell
+[root@localhost permission_practice]# chown -R diana:managers company/departments/hr/
+[root@localhost permission_practice]# ls -l company/departments/hr/
+total 4
+-rw-r--r--. 1 diana managers  0 Jul 21 16:48 contracts.pdf
+-rw-r--r--. 1 diana managers  0 Jul 21 16:48 employees.xlsx
+-rw-r--r--. 1 diana managers  0 Jul 21 16:48 policies.txt
+-rw-r--r--. 1 diana managers 25 Jul 21 16:49 salaries.txt
+[root@localhost permission_practice]# ls -l company/departments/
+total 0
+drwxr-xr-x. 2 alice developers 123 Jul 21 16:49 dev
+drwxr-xr-x. 2 root  root        64 Jul 21 16:48 finance
+drwxr-xr-x. 2 diana managers    89 Jul 21 16:49 hr
+drwxr-xr-x. 2 root  root         6 Jul 21 16:48 marketing
 
-
+```
+shared/tools/ 디렉터리와 모든 하위 파일: root 소유, developers 그룹
+```shell
+[root@localhost permission_practice]# chown -R root:developers shared/tools/
+[root@localhost permission_practice]# ls -l shared/tools/
+total 8
+-rw-r--r--. 1 root developers 33 Jul 21 16:49 backup.sh
+-rw-r--r--. 1 root developers 37 Jul 21 16:49 deploy.sh
+[root@localhost permission_practice]# ls -l shared/
+total 0
+drwxr-xr-x. 2 root root       68 Jul 21 16:48 documents
+d---r-x---. 2 root developers 58 Jul 21 16:48 resources
+dr--r-x---. 2 root developers 40 Jul 21 16:49 tools
+```
 
 4-2. 그룹 전용 변경
 다음 디렉터리들의 그룹만 변경하세요:
 company/projects/: managers 그룹으로 변경
 backup/daily/: developers 그룹으로 변경
 명령어를 작성하세요:
+
 # 4-2 답안 작성란
-
-
-
-
+```shell
+[root@localhost permission_practice]# chgrp managers company/projects/
+[root@localhost permission_practice]# chgrp developers backup/daily/
+[root@localhost permission_practice]# ls -l company/
+total 0
+drwxr-xr-x. 6 root root     59 Jul 21 16:48 departments
+drwxr-xr-x. 5 root managers 57 Jul 21 16:48 projects
+[root@localhost permission_practice]# ls -l backup
+total 0
+drwxr-xr-x. 2 root developers 60 Jul 21 16:48 daily
+drwxr-xr-x. 2 root root        6 Jul 21 16:48 monthly
+drwxr-xr-x. 2 root root        6 Jul 21 16:48 weekly
+```
 
 
 5. 실전 시나리오 해결
@@ -362,12 +429,28 @@ eve: umask 002 (그룹 협업 친화적 설정)
 8. 실행 권한 및 스크립트 관리
 8-1. 스크립트 실행 환경 설정
 다음 스크립트 파일들의 실행 권한을 적절히 설정하세요:
-shared/tools/deploy.sh: developers 그룹만 실행 가능
-shared/tools/backup.sh: alice와 diana만 실행 가능 (ACL 사용)
-company/departments/dev/build.sh: 소유자만 실행 가능
+
+
 명령어를 작성하세요:
 # 8-1 답안 작성란
+shared/tools/deploy.sh: developers 그룹만 실행 가능
+```shell
+[root@localhost permission_practice]# ls -l shared/tools/deploy.sh
+-rw-r--r--. 1 root developers 37 Jul 21 16:49 shared/tools/deploy.sh
+[root@localhost permission_practice]# chmod 654 shared/tools/deploy.sh
+[root@localhost permission_practice]# ls -l shared/tools/deploy.sh
+-rw-r-xr--. 1 root developers 37 Jul 21 16:49 shared/tools/deploy.sh
+```
+shared/tools/backup.sh: alice와 diana만 실행 가능 (ACL 사용)
 
+company/departments/dev/build.sh: 소유자만 실행 가능
+```shell
+[root@localhost permission_practice]# ls -l company/departments/dev/build.sh
+-rwxr-xr--. 1 alice developers 32 Jul 21 16:49 company/departments/dev/build.sh
+[root@localhost permission_practice]# chmod 744 company/departments/dev/build.sh
+[root@localhost permission_practice]# ls -l company/departments/dev/build.sh
+-rwxr--r--. 1 alice developers 32 Jul 21 16:49 company/departments/dev/build.sh
+```
 
 
 

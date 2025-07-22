@@ -119,6 +119,7 @@ sudo 권한 필요
 
 
 #### nano etc/profile 내부 
+
 ```shell
 sudo cat /etc/login_notice.txt
 ```

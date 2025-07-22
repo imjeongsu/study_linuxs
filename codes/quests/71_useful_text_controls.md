@@ -350,18 +350,29 @@ File not found: config.xml
 11-1. employees.txt 파일에서 각 도시별 직원 수를 계산하여 많은 순서대로 출력하세요.
 # 명령어를 작성하세요
 ```shell
-
+[im@localhost text_processing_practice]$ cut -d ':' -f3 employees.txt | sort -nr | uniq -c
+      3 Seoul
+      1 Daegu
+      1 Busan
 ```
 11-2. system.log 파일에서 시간대별(시간 단위) 로그 개수를 계산하세요.
 # 명령어를 작성하세요
 ```shell
-[im@localhost text_processing_practice]$ cut -d ' ' -f2 system.log | wc -l
-7
+[im@localhost text_processing_practice]$ cut -d ' ' -f2 system.log | cut -d ':' -f1 | uniq -c
+      6 09
+      1 10
 ```
 
 11-4. 모든 .txt 파일에서 가장 많이 사용된 단어 상위 5개를 찾으세요.
 # 명령어를 작성하세요
-
+```shell
+[im@localhost text_processing_practice]$ cat ./*.txt | tr " :" "\n" | sort | uniq -c | sort -t" " -k1 -r | head -n 5
+      6 Seoul
+      6 apple
+      5 banana
+      4 cherry
+      3 Linux
+      ```
 
 문제 12: 실무 시나리오 (최고급)
 다음 실무 상황을 가정하고 명령어를 작성하세요:
@@ -372,13 +383,32 @@ echo -e "192.168.1.10 - - [15/Jan/2024:10:30:00] GET /index.html 200\n192.168.1.
 
 # 가장 많이 접속한 IP 주소를 찾으세요
 # 명령어를 작성하세요
+```shell
+[im@localhost text_processing_practice]$ sort -n access.log | cut -d " " -f1 | uniq -c
+```
 
 12-2. 시스템 사용자 분석
 # /etc/passwd 파일에서 실제 사용자(홈 디렉토리가 /home으로 시작)만 추출하여 사용자명 순으로 정렬하세요
 # 명령어를 작성하세요
+```shell
+[im@localhost ~]$ cat /etc/passwd | cut -d ':' -f6 |  cat /etc/passwd | grep 'home' | cut -d ':' -f6 | cut -d '/' -f3 | sort
+alice
+bob
+charlie
+diana
+eve
+im
+```
+
 
 12-3. 설정 파일 백업 및 비교
 # employees.txt 파일을 백업하고, 원본에서 한 줄을 수정한 후 차이점을 확인하세요
 # 명령어들을 순서대로 작성하세요
 
-
+```shell
+[im@localhost text_processing_practice]$ cp employees.txt employees_backup.txt
+[im@localhost text_processing_practice]$ echo 'blabla' >> employees.txt
+[im@localhost text_processing_practice]$ diff employees.txt employees_backup.txt
+6d5
+< blabla
+```

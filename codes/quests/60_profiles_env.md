@@ -4,7 +4,7 @@
 🔹 문제 1. 로그인 시마다 "Welcome, USERNAME" 메시지를 출력하시오.
 조건:
 현재 로그인한 사용자명을 포함할 것 ($USER)
-# nano .bash_profile 내부 
+#### nano .bash_profile 내부 
 ```shell
 # .bash_profile
 
@@ -16,7 +16,7 @@ fi
 # User specific environment and startup programs
 echo "Welcome, $USER"
 ```
-
+#### 명령어 + 결과
 로그인할 때마다 자동으로 출력되도록 설정할 것
 ```shell
 [im@localhost ~]$ su im -
@@ -34,7 +34,7 @@ Welcome, im
 
 
 로그인 시 자동 실행
-# nano .bash_profile 내부 
+#### nano .bash_profile 내부 
 ```shell
 # .bash_profile
 
@@ -50,7 +50,7 @@ rm -- ~/Downloads/*
 
 ```shell
 
-
+#### 명령어 + 결과
 [im@localhost Downloads]$ ls -l 
 total 0
 -rw-r--r--. 1 im im 0 Jul 22 12:04 test1.txt
@@ -79,7 +79,7 @@ total 0
 
 매 로그인마다 자동 생성
 
-# nano .bash_profile 내부 
+#### nano .bash_profile 내부 
 ```shell
 # .bash_profile
 
@@ -92,7 +92,9 @@ fi
 echo "Welcome, $USER"
 rm Downloads/*
 mkdir -p ~/Downloads/auto_created/logs && echo "Hello" >> ~/Downloads/auto_created/logs/log.txt && echo "Say Hi" >>  ~/Downloads/auto_created/info.txt
-
+```
+#### 명령어 + 결과
+```shell
 [im@localhost ~]$ cat Downloads/auto_created/logs/log.txt
 Hello
 [im@localhost ~]$ cat Downloads/auto_created/info.txt
@@ -116,10 +118,12 @@ Say Hi
 sudo 권한 필요
 
 
-# nano etc/profile 내부 
+#### nano etc/profile 내부 
 ```shell
 sudo cat /etc/login_notice.txt
+```
 
+#### 명령어 + 결과
 ```shell
 [root@localhost etc] echo "대상 : 모든사용자 / 모든 사용자에게 공지합니다." > login_notice.txt
 

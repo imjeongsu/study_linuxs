@@ -13,7 +13,8 @@ readfirst="$1"
 
 read -p "read input : " rinput
 
-echo "input values : $1 $rinput"
+echo "input values : $readfirst $rinput"
+
 ```
 
 결과값

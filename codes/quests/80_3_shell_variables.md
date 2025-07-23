@@ -60,6 +60,20 @@ bash wordcount.sh
 Enter filename: sample.txt
 Word count in sample.txt: 123
 
+## 스크립트.sh 내부 소스
+```shell
+# filename 즉 파일명 입력받아 $filename 변수에 저장
+read -p "filename : " filename
+# wc 명령어를 통해 read에서 입력받은 파일명의 파일 내부 단어개수 출력
+wc -w "$filename"
+```
+
+## 결과값
+```shell
+[im@localhost Downloads]$ source ./numberone.sh
+filename : article.txt
+22 article.txt
+```
 
 ✅ [문제 2] 특정 단어 검색 및 빈도수 세기
 # 문제 설명

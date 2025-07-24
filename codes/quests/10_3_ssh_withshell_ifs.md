@@ -109,6 +109,7 @@ elif [ "$subject" = "과학" ]; then
         cat students.txt | cut -d ":" -f1,6,7
 
 
+
 else
         echo "해당 과목은 유효하지 않습니다."
 

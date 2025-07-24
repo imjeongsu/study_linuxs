@@ -178,6 +178,30 @@ use
 bash compare_lastline.sh file1.txt file2.txt
 Result: Different
 
+## 스크립트.sh 내부 소스
+```shell
+  GNU nano 5.6.1                                   compaer_lastline.sh                                             
+f_file=$(tail -n 1 "$1")
+s_file=$(tail -n 1 "$2")
+
+echo "$f_file" > /tmp/line1.tmp
+echo "$s_file" > /tmp/line2.tmp
+
+if diff /tmp/line1.tmp /tmp/line2.tmp > /dev/null; then
+  echo "Result: Same"
+else
+  echo "Result: Different"
+fi
+
+
+```
+
+## 결과값
+```shell
+[im@localhost ~]$ source compaer_lastline.sh file1.txt file2.txt
+Result: Different
+
+```
 
 ✅ [문제 5] 이메일 리스트 정제 및 카운트
 # 문제 설명

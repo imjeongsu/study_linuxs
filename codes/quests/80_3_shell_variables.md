@@ -63,16 +63,20 @@ Word count in sample.txt: 123
 ## 스크립트.sh 내부 소스
 ```shell
 # filename 즉 파일명 입력받아 $filename 변수에 저장
-read -p "filename : " filename
-# wc 명령어를 통해 read에서 입력받은 파일명의 파일 내부 단어개수 출력
-wc -w "$filename"
+read -p "Enter file name: " filename
+
+# wc 명령어를 통해 read에서 입력받은 파일명의 파일 내부 단어개수 출력을 입력받아 $wordcount 변수에 저장
+wordcount=$(wc -w "$filename")
+
+echo "Word count in $filename : $wordcount"
+
 ```
 
 ## 결과값
 ```shell
-[im@localhost Downloads]$ source ./numberone.sh
-filename : article.txt
-22 article.txt
+[im@localhost ~]$ source wordcount.sh
+Enter file:name: article.txt
+Word count in article.txt : 22 article.txt
 ```
 
 ✅ [문제 2] 특정 단어 검색 및 빈도수 세기
@@ -90,6 +94,23 @@ cat logfile.txt | grep -i "error" -c
 bash count_keyword.sh error logfile.txt
 The word 'error' appeared 5 times.
 
+## 스크립트.sh 내부 소스
+```shell
+keyword="$1"
+filename="$2"
+
+keycount=$(grep -io $keyword $filename | wc -l)
+
+echo "The word $keyword appeared $keycount times"
+```
+
+## 결과값
+```shell
+[im@localhost ~]$ source count_keyword.sh error logfile.txt
+The word error appeared 3 times
+```
+
+
 
 ✅ [문제 3] 고유 단어 목록 만들기
 # 문제 설명
@@ -104,8 +125,46 @@ The word 'error' appeared 5 times.
 bash unique_words.sh
 Enter input file: article.txt
 Unique words saved to: article_unique.txt
+## 스크립트.sh 내부 소스
+```shell
+read -p "Enter input file: " filename
+
+tr -cs "A-Za-z" "\n" < "$filename" | tr "A-Z" "a-z" | sort | uniq > "${filename%.*}_unique.txt"
+
+echo "Unique words saved to ${filename%.*}_unique.txt"
+
+```
 
 
+## 결과값
+```shell
+
+[im@localhost ~]$ source unique_words.sh 
+Enter input file: article.txt
+Unique words saved to article_unique.txt
+
+[im@localhost ~]$ cat article_unique.txt 
+an
+and
+automation
+developers
+embedded
+for
+is
+linux
+many
+open
+operating
+popular
+programming
+servers
+source
+system
+systems
+use
+
+
+```
 ✅ [문제 4] 두 파일의 마지막 줄 비교
 # 문제 설명
 두 개의 텍스트 파일을 인자로 받아 각각의 마지막 줄을 비교하고, 같으면 "Same", 다르면 "Different" 출력

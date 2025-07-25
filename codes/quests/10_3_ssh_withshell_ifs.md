@@ -94,7 +94,7 @@ cut, grep, sort, wc 명령어 활용
 파이프라인으로 명령어 연결
 조건문으로 점수 범위 검사
 
-
+## grade_analyzer.sh 내부 소스 코드
 ```shell
 read -p "Enter subjects : " subject
 
@@ -127,8 +127,66 @@ else
 
 fi
 ```
+## 결과값
 
+### 결과 (input: 유효값, 수학 영어 과학)
+```shell
+[im@192.168.0.31 ~/shellscipts]$ source grade_analyzer.sh
+Enter subjects : 수학
+김철수:수학:85
+이영희:수학:95
+박민수:수학:76
+최지원:수학:88
+정우진:수학:92
+김지현:수학:83
+이준호:수학:79
+박서연:수학:97
+한도윤:수학:81
+송민재:수학:86
+76
+97
+86.2
 
+[im@192.168.0.31 ~/shellscipts]$ source grade_analyzer.sh
+Enter subjects : 영어
+김철수:영어:92
+이영희:영어:88
+박민수:영어:79
+최지원:영어:95
+정우진:영어:76
+김지현:영어:91
+이준호:영어:84
+박서연:영어:93
+한도윤:영어:77
+송민재:영어:89
+76
+95
+86.4
+
+[im@192.168.0.31 ~/shellscipts]$ source grade_analyzer.sh
+Enter subjects : 과학
+김철수:과학:78
+이영희:과학:91
+박민수:과학:82
+최지원:과학:89
+정우진:과학:94
+김지현:과학:87
+이준호:과학:76
+박서연:과학:96
+한도윤:과학:83
+송민재:과학:91
+76
+96
+86.7
+
+```
+
+## r결과 (input : 국어 , 유호하지 않은 값)
+```shell
+[im@192.168.0.31 ~/shellscipts]$ source grade_analyzer.sh
+Enter subjects : 국어
+해당 과목은 유효하지 않습니다.
+```
 
 
 

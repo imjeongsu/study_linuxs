@@ -98,29 +98,35 @@ cut, grep, sort, wc 명령어 활용
 ```shell
 read -p "Enter subjects : " subject
 
+low_math=cat students.txt | cut -d ":" -f3 | sort | head -1
+
+
 
 if [ "$subject" = "수학" ]; then
         cat students.txt | cut -d ":" -f1,2,3
-        
+        cat students.txt | cut -d ":" -f3 | sort | head -1
+        cat students.txt | cut -d ":" -f3 | sort | tail -1
+        cat students.txt | cut -d ":" -f3 | sort | awk '{sum+=$1}END{print sum/NR}'
+
+
 elif [ "$subject" = "영어" ]; then
         cat students.txt | cut -d ":" -f1,4,5
+        cat students.txt | cut -d ":" -f5 | sort | head -1
+        cat students.txt | cut -d ":" -f5 | sort | tail -1
+        cat students.txt | cut -d ":" -f5 | sort | awk '{sum+=$1}END{print sum/NR}'
 
 elif [ "$subject" = "과학" ]; then
         cat students.txt | cut -d ":" -f1,6,7
-
-
+        cat students.txt | cut -d ":" -f7 | sort | head -1
+        cat students.txt | cut -d ":" -f7 | sort | tail -1
+        cat students.txt | cut -d ":" -f7 | sort | awk '{sum+=$1}END{print sum/NR}'
 
 else
         echo "해당 과목은 유효하지 않습니다."
 
 
 fi
-~                                                                                                                 
-~                                                                                                                 
-~                                                                                                                 
-~    
 ```
-
 
 
 
